@@ -6,7 +6,7 @@ html {
 
 body {
   background: black;
-  color: white;
+  color: linen;
   overflow-x: hidden;
   position: relative;
   
@@ -76,7 +76,6 @@ main {
 }
 
 #splash-wrapper {
-  //border: 2px solid white;
   margin-top: 20vh;
   height: 80vh;
 }
@@ -119,27 +118,24 @@ main {
 
 .flex-container {
   height: 99vh;
-  //border: 2px white solid;
   display: flex;
   overflow-x: scroll;
   overflow-y: hidden;
   padding-top: 20vh;
   .image-container {
-    //cursor: url("media/svg/arrowleft.svg"),auto;
     height: 100%;
     background: $accent;
     width: auto;
-    margin: 10px 10px 10px 10px;
+    margin: 10px;
     img {
-      //display: none;
       height: 100%;
-      opacity: .5;
+      mix-blend-mode: multiply;
     }
   }
 }
 
 .image-container img:hover {
-  opacity: 1;
+  mix-blend-mode: normal;
 }
 
 #container {
@@ -152,7 +148,6 @@ main {
     padding-bottom: 50px;
     align-items: center;
     justify-content: center;
-    //max-width: 200px;
   }
 }
 
@@ -170,7 +165,6 @@ main {
 }
 
 #heart {
- // background: yellow;
   color: $accent;
   position: relative;
   font-size: 1.5em;

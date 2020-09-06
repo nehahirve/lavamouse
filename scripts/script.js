@@ -33,7 +33,7 @@ flexbox.forEach(box => box.addEventListener('click', scrollHandler))
 window.addEventListener('scroll', logoMoveUp)
 logo.addEventListener('click', logoMoveDown)
 
-// scrolls left and right within flexbox
+// scrolls left and right within flexbox (i should nest this in cursorhandler)
 
 function scrollHandler (event) {
   event.preventDefault()
@@ -76,8 +76,6 @@ window.onscroll = function (e) {
   }
   this.oldScroll = this.scrollY
 }
-
-
 
 warp.interpolate(7)
 warp.transform(([x, y]) => [x, y, y])
@@ -134,9 +132,7 @@ function logoMoveDown () {
 }
 
 // animating the heart
-
-
-var heart = document.querySelector('#heart');
+const heart = document.querySelector('#heart')
 
 heart.addEventListener('mouseover', animateHeart)
 

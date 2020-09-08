@@ -77,7 +77,7 @@ window.onscroll = function (e) {
   this.oldScroll = this.scrollY
 }
 
-warp.interpolate(7)
+warp.interpolate(4)
 warp.transform(([x, y]) => [x, y, y])
 let offset = 0
 let running = true
@@ -104,13 +104,50 @@ function stopAnimation () {
   originalsvg.addEventListener('mouseover', startAnimation)
 }
 
+let yUpValue, scale
+const width = window.innerWidth
+
+switch (true) {
+  case (width > 2000):
+    yUpValue = -430
+    scale = 0.12
+    break
+  case (width < 600):
+    yUpValue = -420
+    scale = 0.25
+    break
+  case (width > 600 && width < 700):
+    yUpValue = -390
+    scale = 0.25
+    break
+  case (width > 700 && width < 800):
+    yUpValue = -400
+    scale = 0.23
+    break
+  case (width > 800 && width < 1000):
+    yUpValue = -430
+    scale = 0.16
+    break
+  case (width > 1000 && width < 1300):
+    yUpValue = -340
+    scale = 0.25
+    break
+  case (width > 1300 && width < 1400):
+    yUpValue = -420
+    scale = 0.16
+    break
+  default:
+    yUpValue = -395
+    scale = 0.15
+}
+
 function logoMoveUp (event) {
-  event.preventDefault()
+event.preventDefault()
   anime({
     targets: [logo],
-    translateY: -395,
+    translateY: yUpValue,
     translateX: 12,
-    scale: 0.15,
+    scale: scale,
     duration: 2000,
     loop: false
   })
@@ -119,20 +156,22 @@ function logoMoveUp (event) {
 function logoMoveDown () {
   window.removeEventListener('scroll', logoMoveUp)
   anime({
-    targets: [svg, originalsvg, logo],
+    targets: [logo],
     translateY: 0,
     translateX: 0,
     scale: 1,
     duration: 2000,
     loop: false,
-    complete: function (anim) {
+    complete: function () {
       window.addEventListener('scroll', logoMoveUp)
     }
   })
 }
 
 // animating the heart
+
 const heart = document.querySelector('#heart')
+const newheart = document.querySelector('#newheart')
 
 heart.addEventListener('mouseover', animateHeart)
 
@@ -140,9 +179,32 @@ function animateHeart () {
   anime({
     targets: heart,
     translateX: 250,
-    translateY: 50,
-    scale: 4, // -> '250px'
-    rotate: 780,
-    duration: 5000 // -> '540deg'
+    translateY: 50, // -> '250px'
+    scale: 4,
+    rotate: 780, // -> '540deg'
+    duration: 5000
   })
 }
+
+// make heart draggable
+
+let mouseIsDown = false
+
+heart.addEventListener('mousedown', function () {
+  mouseIsDown = true
+})
+
+document.addEventListener('mouseup', function () {
+  mouseIsDown = false
+})
+
+document.addEventListener('mousemove', function (event) {
+  event.preventDefault()
+  if (mouseIsDown) {
+    heart.style.position = 'fixed'
+    heart.style.zIndex = '400'
+    heart.style.left = (event.clientX - 250) + 'px'
+    heart.style.top = (event.clientY - 50) + 'px'
+    newheart.style.display = 'block'
+  }
+})

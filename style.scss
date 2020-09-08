@@ -68,7 +68,6 @@ main {
   padding: 10px;
   padding-top: 10vh;
   position: relative;
-  
   p {
     margin-bottom: 20px;
     line-height: 2em;
@@ -99,11 +98,37 @@ main {
   left: 25vw;
   width: 50vw;
   margin: auto;
-  //background: green;
   svg {
     width: 100%;
   }
 }
+
+@media only screen and (max-width: 1400px) {
+  #logo {
+    top: 30vh;
+    width: 70vw;
+    left: 15vw;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  #logo {
+    top: 35vh;
+    width: 80vw;
+    left: 10vw;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #logo {
+    top: 40vh;
+    width: 90vw;
+    left: 5vw;
+  }
+}
+
+
+
 
 .empty {
   height: 100%;
@@ -164,10 +189,17 @@ main {
   background-size: 5%;
 }
 
-#heart {
+#heart, #newheart {
   color: $accent;
   position: relative;
   font-size: 1.5em;
   top: -3px;
   margin-left: 20px;
+  cursor: pointer;
+  
+}
+
+#newheart {
+  display: none;
+  color: black;
 }

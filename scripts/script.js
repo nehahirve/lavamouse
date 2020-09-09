@@ -118,8 +118,9 @@ function stopAnimation () {
   originalsvg.addEventListener('mouseover', startAnimation)
 }
 
-let yUpValue, scale
+let yUpValue, scale, percent
 const width = window.innerWidth
+const height = window.innerHeight
 
 switch (true) {
   case (width > 2000):
@@ -129,51 +130,80 @@ switch (true) {
   case (width < 600):
     yUpValue = -420
     scale = 0.25
+    percent = -230
     break
   case (width > 600 && width < 700):
     yUpValue = -390
     scale = 0.25
+    percent = -140
     break
   case (width > 700 && width < 800):
     yUpValue = -400
     scale = 0.23
+    percent = -140
     break
   case (width > 800 && width < 1000):
     yUpValue = -430
     scale = 0.16
+    percent = -140
     break
   case (width > 1000 && width < 1200):
     yUpValue = -400
     scale = 0.18
+    percent = -130
     break
     case (width > 1200 && width < 1400):
       yUpValue = -420
       scale = 0.16
+      percent = -130
       break
   case (width > 1300 && width < 1400):
     yUpValue = -420
     scale = 0.16
+    percent = -130
+    break
+  case (width > 1400 && width < 1600 && height < 900):
+    yUpValue = -380
+    scale = 0.16
+    percent = -110
     break
   case (width > 1400 && width < 1600):
     yUpValue = -380
     scale = 0.16
+    percent = -130
     break
+  case (width > 1600 && width < 1800 && height < 900):
+    yUpValue = -380
+    scale = 0.16
+    percent = -105
+    break
+  case (width > 1600 && width < 1800):
+    yUpValue = -380
+    scale = 0.16
+    percent = -120
+    break
+  
+    
   default:
     yUpValue = -395
     scale = 0.15
+    percent = -130
+    
 }
 
 function logoMoveUp (event) {
 event.preventDefault()
+logo.style.position = 'fixed'
 window.removeEventListener('scroll', logoMoveDown)
   anime({
     targets: [logo],
-    translateY: yUpValue,
+    translateY: (percent) + '%',
     translateX: 12,
     scale: scale,
     duration: 2000,
     loop: false,
     complete: function () {
+      //logo.style.top = '100px'
       window.addEventListener('scroll', logoMoveDown)
     }
   })

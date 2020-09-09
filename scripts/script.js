@@ -127,6 +127,11 @@ switch (true) {
     yUpValue = -430
     scale = 0.12
     break
+  case (width < 600 && height < 900):
+    yUpValue = -420
+    scale = 0.25
+    percent = -190
+    break
   case (width < 600):
     yUpValue = -420
     scale = 0.25
@@ -147,6 +152,11 @@ switch (true) {
     scale = 0.16
     percent = -140
     break
+    case (width > 1000 && width < 1200 && height < 900):
+      yUpValue = -400
+      scale = 0.18
+      percent = -100
+      break
   case (width > 1000 && width < 1200):
     yUpValue = -400
     scale = 0.18

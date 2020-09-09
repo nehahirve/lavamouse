@@ -30,8 +30,7 @@ function smoothScroll (event) {
 
 flexbox.forEach(box => box.addEventListener('mousemove', cursorHandler))
 flexbox.forEach(box => box.addEventListener('click', scrollHandler))
-window.addEventListener('scroll', logoMoveUp)
-logo.addEventListener('click', logoMoveDown)
+
 
 // scrolls left and right within flexbox (i should nest this in cursorhandler)
 
@@ -65,17 +64,32 @@ function cursorHandler (event) {
 }
 
 // animating the logo
-
+logo.addEventListener('click', logoMoveDown)
 svg.addEventListener('mouseover', startAnimation)
 svg.addEventListener('mouseleave', stopAnimation)
 
 // if we scroll up past a certain point animate the logo
+/*
 window.onscroll = function (e) {
+
+
   if (this.oldScroll > this.scrollY && this.scrollY < 60) {
     logoMoveDown()
+  } else if (this.oldScroll < this.scrollY && this.scrollY > 60) {
+    logoMoveUp()
   }
   this.oldScroll = this.scrollY
 }
+*/
+
+window.addEventListener('scroll', event => {
+  if (this.scrollY < 60) {
+    console.log(this.scrollY)
+    logoMoveDown()
+  } else {
+    logoMoveUp()
+  }
+})
 
 warp.interpolate(4)
 warp.transform(([x, y]) => [x, y, y])
@@ -143,13 +157,17 @@ switch (true) {
 
 function logoMoveUp (event) {
 event.preventDefault()
+window.removeEventListener('scroll', logoMoveDown)
   anime({
     targets: [logo],
-    translateY: yUpValue,
+    translateY: '-43vh',
     translateX: 12,
     scale: scale,
     duration: 2000,
-    loop: false
+    loop: false,
+    complete: function () {
+      window.addEventListener('scroll', logoMoveDown)
+    }
   })
 }
 

@@ -37,13 +37,11 @@ flexbox.forEach(box => box.addEventListener('click', scrollHandler))
 function scrollHandler (event) {
   event.preventDefault()
   if (event.clientX > window.innerWidth / 5 * 4) {
-    console.log('clickright')
     this.scrollBy({
       left: +900,
       behavior: 'smooth'
     })
   } else if (event.clientX < window.innerWidth / 5) {
-    console.log(this)
     this.scrollBy({
       left: -900,
       behavior: 'smooth'
@@ -82,14 +80,25 @@ window.onscroll = function (e) {
 }
 */
 
-window.addEventListener('scroll', event => {
+window.addEventListener('scroll', throttle(callbackScroll, 10))
+
+function throttle(fn, wait) {
+  var time = Date.now()
+  return function () {
+    if ((time + wait - Date.now()) < 0) {
+      fn()
+      time = Date.now();
+    }
+  }
+}
+
+function callbackScroll () {
   if (this.scrollY < 60) {
-    console.log(this.scrollY)
     logoMoveDown(event)
   } else {
     logoMoveUp(event)
   }
-})
+}
 
 warp.interpolate(4)
 warp.transform(([x, y]) => [x, y, y])
@@ -118,16 +127,23 @@ function stopAnimation () {
   originalsvg.addEventListener('mouseover', startAnimation)
 }
 
+console.log(logo.style.top)
+
 let yUpValue, scale, percent
 const width = window.innerWidth
 const height = window.innerHeight
 
 switch (true) {
+  case (width < 376):
+    yUpValue = -430
+    scale = 0.10
+    percent = -230
+    break
   case (width > 2000):
     yUpValue = -430
     scale = 0.12
     break
-  case (width < 600 && height < 900):
+  case (width < 600 && height < 800):
     yUpValue = -420
     scale = 0.25
     percent = -190
@@ -152,7 +168,7 @@ switch (true) {
     scale = 0.16
     percent = -140
     break
-    case (width > 1000 && width < 1200 && height < 900):
+    case (width > 1000 && width < 1200 && height < 800):
       yUpValue = -400
       scale = 0.18
       percent = -100
@@ -162,17 +178,22 @@ switch (true) {
     scale = 0.18
     percent = -130
     break
-    case (width > 1200 && width < 1400):
+  case (width > 1200 && width < 1300 && height < 800):
       yUpValue = -420
       scale = 0.16
-      percent = -130
+      percent = -100
+      break
+    case (width > 1200 && width < 1300):
+      yUpValue = -420
+      scale = 0.16
+      percent = -120
       break
   case (width > 1300 && width < 1400):
     yUpValue = -420
     scale = 0.16
-    percent = -130
+    percent = -110
     break
-  case (width > 1400 && width < 1600 && height < 900):
+  case (width > 1400 && width < 1600 && height < 800):
     yUpValue = -380
     scale = 0.16
     percent = -110
@@ -182,7 +203,7 @@ switch (true) {
     scale = 0.16
     percent = -130
     break
-  case (width > 1600 && width < 1800 && height < 900):
+  case (width > 1600 && width < 1800 && height < 800):
     yUpValue = -380
     scale = 0.16
     percent = -105
@@ -213,7 +234,6 @@ window.removeEventListener('scroll', logoMoveDown)
     duration: 2000,
     loop: false,
     complete: function () {
-      //logo.style.top = '100px'
       window.addEventListener('scroll', logoMoveDown)
     }
   })

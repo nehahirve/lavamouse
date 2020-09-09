@@ -85,9 +85,9 @@ window.onscroll = function (e) {
 window.addEventListener('scroll', event => {
   if (this.scrollY < 60) {
     console.log(this.scrollY)
-    logoMoveDown()
+    logoMoveDown(event)
   } else {
-    logoMoveUp()
+    logoMoveUp(event)
   }
 })
 
@@ -142,12 +142,20 @@ switch (true) {
     yUpValue = -430
     scale = 0.16
     break
-  case (width > 1000 && width < 1300):
-    yUpValue = -340
-    scale = 0.25
+  case (width > 1000 && width < 1200):
+    yUpValue = -400
+    scale = 0.18
     break
+    case (width > 1200 && width < 1400):
+      yUpValue = -420
+      scale = 0.16
+      break
   case (width > 1300 && width < 1400):
     yUpValue = -420
+    scale = 0.16
+    break
+  case (width > 1400 && width < 1600):
+    yUpValue = -380
     scale = 0.16
     break
   default:
@@ -160,7 +168,7 @@ event.preventDefault()
 window.removeEventListener('scroll', logoMoveDown)
   anime({
     targets: [logo],
-    translateY: '-43vh',
+    translateY: yUpValue,
     translateX: 12,
     scale: scale,
     duration: 2000,

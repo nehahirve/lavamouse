@@ -55,6 +55,7 @@ nav {
 
 main {
   margin-top: 10vh;
+  overflow: auto;
 }
 
 #center-nav {
@@ -75,13 +76,12 @@ main {
 }
 
 #splash-wrapper {
-  margin-top: 20vh;
+  margin-top: 10vh;
   height: 80vh;
 }
 
 #splash {
-  margin: auto;
-  margin-top: 100px;
+  //margin: auto;
   height: 60vh;
   width: 100vw;
   background-size: cover;
@@ -89,22 +89,26 @@ main {
   background-position-x: center;
   background-image: url(media/images/splash.jpg);
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+
 }
 
 #logo {
-  z-index: 200;
-  position: fixed;
-  top: 30vh;
-  left: 25vw;
-  width: 50vw;
-  margin: auto;
+  z-index: 7000;
+  max-width: 800px;
+  min-width: 500px;
+  width: 50%;
+  @media only screen and (max-width: 600px) {
+  }
   will-change: transform;
   svg {
     width: 100%;
   }
 }
 
-
+/*
 @media only screen and (max-width: 1400px) {
   #logo {
     top: 30vh;
@@ -129,7 +133,7 @@ main {
   }
 }
 
-
+*/
 
 
 .empty {

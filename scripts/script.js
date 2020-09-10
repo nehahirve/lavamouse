@@ -5,32 +5,14 @@ const logo = document.getElementById('logo')
 const svg = document.getElementById('svg-element')
 const originalsvg = document.getElementById('svg-original')
 const warp = new Warp(svg)
+const windowHeight = window.innerHeight
 
 originalsvg.setAttribute('display', 'none')
-
-// smooth scroll for safari
-/*
-const links = document.querySelectorAll('.scrolly')
-
-links.forEach(link => link.addEventListener('click', smoothScroll))
-
-function smoothScroll (event) {
-  event.preventDefault()
-  const href = event.target.getAttribute('href')
-  const offsetTop = document.querySelector(href).offsetTop
-
-  scroll({
-    top: offsetTop,
-    behavior: 'smooth'
-  })
-}
-*/
 
 // event listeners
 
 flexbox.forEach(box => box.addEventListener('mousemove', cursorHandler))
 flexbox.forEach(box => box.addEventListener('click', scrollHandler))
-
 
 // scrolls left and right within flexbox (i should nest this in cursorhandler)
 
@@ -62,6 +44,7 @@ function cursorHandler (event) {
 }
 
 // animating the logo
+window.addEventListener('scroll', throttle(callbackScroll, 10))
 logo.addEventListener('click', logoMoveDown)
 svg.addEventListener('mouseover', startAnimation)
 svg.addEventListener('mouseleave', stopAnimation)
@@ -80,14 +63,15 @@ window.onscroll = function (e) {
 }
 */
 
-window.addEventListener('scroll', throttle(callbackScroll, 10))
 
-function throttle(fn, wait) {
+
+
+function throttle (fn, wait) {
   var time = Date.now()
   return function () {
     if ((time + wait - Date.now()) < 0) {
       fn()
-      time = Date.now();
+      time = Date.now()
     }
   }
 }
@@ -127,113 +111,19 @@ function stopAnimation () {
   originalsvg.addEventListener('mouseover', startAnimation)
 }
 
-console.log(logo.style.top)
-
-let yUpValue, scale, percent
-const width = window.innerWidth
-const height = window.innerHeight
-
-switch (true) {
-  case (width < 376):
-    yUpValue = -430
-    scale = 0.10
-    percent = -230
-    break
-  case (width > 2000):
-    yUpValue = -430
-    scale = 0.12
-    break
-  case (width < 600 && height < 800):
-    yUpValue = -420
-    scale = 0.25
-    percent = -190
-    break
-  case (width < 600):
-    yUpValue = -420
-    scale = 0.25
-    percent = -230
-    break
-  case (width > 600 && width < 700):
-    yUpValue = -390
-    scale = 0.25
-    percent = -140
-    break
-  case (width > 700 && width < 800):
-    yUpValue = -400
-    scale = 0.23
-    percent = -140
-    break
-  case (width > 800 && width < 1000):
-    yUpValue = -430
-    scale = 0.16
-    percent = -140
-    break
-    case (width > 1000 && width < 1200 && height < 800):
-      yUpValue = -400
-      scale = 0.18
-      percent = -100
-      break
-  case (width > 1000 && width < 1200):
-    yUpValue = -400
-    scale = 0.18
-    percent = -130
-    break
-  case (width > 1200 && width < 1300 && height < 800):
-      yUpValue = -420
-      scale = 0.16
-      percent = -100
-      break
-    case (width > 1200 && width < 1300):
-      yUpValue = -420
-      scale = 0.16
-      percent = -120
-      break
-  case (width > 1300 && width < 1400):
-    yUpValue = -420
-    scale = 0.16
-    percent = -110
-    break
-  case (width > 1400 && width < 1600 && height < 800):
-    yUpValue = -380
-    scale = 0.16
-    percent = -110
-    break
-  case (width > 1400 && width < 1600):
-    yUpValue = -380
-    scale = 0.16
-    percent = -130
-    break
-  case (width > 1600 && width < 1800 && height < 800):
-    yUpValue = -380
-    scale = 0.16
-    percent = -105
-    break
-  case (width > 1600 && width < 1800):
-    yUpValue = -380
-    scale = 0.16
-    percent = -120
-    break
-  
-    
-  default:
-    yUpValue = -395
-    scale = 0.15
-    percent = -130
-    
-}
-
 function logoMoveUp (event) {
 event.preventDefault()
 logo.style.position = 'fixed'
 window.removeEventListener('scroll', logoMoveDown)
   anime({
     targets: [logo],
-    translateY: (percent) + '%',
+    translateY: `${-(windowHeight / 2) + windowHeight * 0.05}`,
     translateX: 12,
-    scale: scale,
+    scale: 0.18,
     duration: 2000,
     loop: false,
     complete: function () {
+      logo.style.position = 'fixed'
       window.addEventListener('scroll', logoMoveDown)
     }
   })

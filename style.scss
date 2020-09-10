@@ -98,10 +98,9 @@ main {
 #logo {
   z-index: 7000;
   max-width: 800px;
-  min-width: 500px;
+  min-width: 350px;
   width: 50%;
-  @media only screen and (max-width: 600px) {
-  }
+  
   will-change: transform;
   svg {
     width: 100%;
@@ -139,6 +138,9 @@ main {
 .empty {
   height: 100%;
   background: black;
+    @media only screen and (max-width: 600px) {
+      display: none;
+    }
 }
 .personal {
   width: 150px;
@@ -208,7 +210,6 @@ main {
   color: $accent;
   position: relative;
   font-size: 1.5em;
-  top: -3px;
   margin-left: 20px;
   cursor: pointer;
   

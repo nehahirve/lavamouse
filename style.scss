@@ -9,12 +9,6 @@ body {
   color: linen;
   overflow-x: hidden;
   position: relative;
-  
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
 }
 
 a:hover {
@@ -23,65 +17,42 @@ a:hover {
 
 nav {
   position: fixed;
-  width: 100%;
-  //border: 2px solid white;
   top: 0;
-  background: black;
   z-index: 100;
-  margin-bottom: 80px;
+  width: 100%;
   height: 10vh;
   padding: 20px;
+  background: black;
   display: flex;
   justify-content: center;
-  align-items: center;
-  div {
-    margin: 0 10px 0 10px;
+  
+  ul {
+    margin: 0 10px;
     display: flex;
     height: 100%;
-    img  {
-      height: 100%;
-    }
-    ul {
-      display: flex;
-      align-items: center;
-      width: 100%;
-      li {
-        display: inline;
-        margin: 10px;
-      }
+    align-items: center;
+    
+    li {
+      display: inline;
+      margin: 10px;
     }
   }
+
+  div {
+    width: 100px;
+    visibility: hidden;
+  }
 }
+
 
 main {
   margin-top: 10vh;
   overflow: auto;
 }
 
-#center-nav {
-  width: 100px;
-}
-
-#about {
-  margin: 50px auto;
-  height: 80vh;
-  max-width: 800px;
-  padding: 10px;
-  padding-top: 10vh;
-  position: relative;
-  p {
-    margin-bottom: 20px;
-    line-height: 2em;
-  }
-}
-
-#splash-wrapper {
-  margin-top: 10vh;
-  height: 80vh;
-}
-
 #splash {
-  //margin: auto;
+  margin-top: 10vh;
+  margin-bottom: 20vh;
   height: 60vh;
   width: 100vw;
   background-size: cover;
@@ -100,40 +71,65 @@ main {
   max-width: 800px;
   min-width: 350px;
   width: 50%;
-  
   will-change: transform;
   svg {
     width: 100%;
   }
 }
 
-/*
-@media only screen and (max-width: 1400px) {
-  #logo {
-    top: 30vh;
-    width: 70vw;
-    left: 15vw;
+#about {
+  margin: 50px auto;
+  height: 80vh;
+  max-width: 800px;
+  padding: 10px;
+  padding-top: 10vh;
+  position: relative;
+  p {
+    margin-bottom: 20px;
+    line-height: 2em;
   }
 }
 
-@media only screen and (max-width: 1000px) {
-  #logo {
-    top: 35vh;
-    width: 80vw;
-    left: 10vw;
-  }
+form {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  height: 35vh;
+  width: 95%;
+  margin: auto;
+  
+  input, textarea {
+    z-index: 100;
+    border-radius: 2%;
+    margin-top: 30px;
+    padding: 5px;
+    border: 2px dashed linen;
+    background: none;
+    color: linen;
+    font-family: 'VCR';
+    font-size: 1.1em;
+    outline: none;
+    &:focus {
+      border: 2px solid linen;
+    }
+  } 
 }
 
-@media only screen and (max-width: 600px) {
-  #logo {
-    top: 40vh;
-    width: 90vw;
-    left: 5vw;
+button {
+  z-index: 1000;
+  width: 100px;
+  margin-top: 20px;
+  padding: 10px;
+  font-family: 'VCR';
+  color: linen;
+  background: $accent;
+  border-radius: 4%;
+  &:hover, &:focus {
+    transform: rotate(-4deg);
+    transition: 0.3s;
   }
 }
-
-*/
-
 
 .empty {
   height: 100%;
@@ -143,8 +139,9 @@ main {
     }
 }
 .personal {
-  width: 150px;
+width: 150px;
 }
+
 .poster {
   width: 400px;
 }
@@ -159,7 +156,7 @@ main {
 .flex-container {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
-  height: 99vh;
+  height: 95vh;
   display: flex;
   overflow-x: scroll;
   overflow-y: hidden;
@@ -182,11 +179,13 @@ main {
 
 #container {
   overflow: hidden;
+
   footer {
+    position: absolute;
+    bottom: 0;
     overflow: hidden;
     width: 100vw;
     display: flex;
-    margin: auto;
     padding-bottom: 50px;
     align-items: center;
     justify-content: center;
@@ -202,7 +201,7 @@ main {
   padding-bottom: .9em;
 }
 
-#large:hover {
+.large:hover {
   background-size: 5%;
 }
 
@@ -218,4 +217,18 @@ main {
 #newheart {
   display: none;
   color: black;
+}
+
+.fire-container {
+  position: absolute;
+  bottom: 0px;
+  left: -25px;
+	height: 50vh;
+  width: 150px;
+}
+
+#graphic {
+  display: none;
+  height: 100%;
+  width: 100%;
 }
